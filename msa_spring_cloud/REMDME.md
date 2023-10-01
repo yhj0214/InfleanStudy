@@ -2,7 +2,7 @@
 </br>
 </br>
 
-### Section1. Microservice와 Spring Cloud의 소개
+### Section0. Microservice와 Spring Cloud의 소개
 
 * Antifragile의 네가지 특징
   + Auto scaling : 확장성, 인스턴스 자동 증감이 가능
@@ -99,4 +99,9 @@ restful한 api로 서로의 서비스에 접근하여 이용
 
 
 
-
+### Section1. Service Discovery
+- Spring Cloud Netflix Eureka
+- Eureka Service Discovery - 프로젝트 생성
+- User Service-프로젝트 생성
+- User Service-등록
+- User Service - Load Balancer
