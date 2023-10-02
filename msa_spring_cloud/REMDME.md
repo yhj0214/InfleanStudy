@@ -105,3 +105,93 @@ restful한 api로 서로의 서비스에 접근하여 이용
 - User Service-프로젝트 생성
 - User Service-등록
 - User Service - Load Balancer
+
+#### Eureka Server 프로젝트 생성
+* 프로젝트 생성
+  + Group : 폴더 구조(회사 도메인이 역순으로 생성하는 것이 일반적)
+  + artifact : 프로젝트 이름
+  + package : group, artifact가 조합되어 생성됨
+  + dependency : EurekaServer 추가 SpringBootApplication에 @EnableEurekaServer 어노테이션 추가
+
+* application.yml
+  ```xml
+  server:
+    port: 8761 //Eureka서버가 사용할 포트번호
+
+  spring:
+    application:
+      name: discoveryservice // Spring framework의 아이디
+
+  eureka:
+    client:  // 해당 설정을 하지 않으면 default가 true로 설정됨
+      register-with-eureka: false // eureka서버는 직접적으로 등록하여 사용할 서비스가 없음
+      fetch-registry: false       // 따라서 false로 지정하여 해당 서버는 등록하지 않음
+                                  // eureka 서버는 서버로서 기동만 하고 있으면 되기 때문
+  ```
+
+* http://[사용자의 ip주소]:8761/로 접근 시 해당 화면 출력
+  ![image](https://github.com/yhj0214/InfleanStudy/assets/87259492/51863de0-c59c-4ac1-bcd8-56e8272492c8)
+  - uptime : 서버가 언제 가동되었는지
+  - instances currently registered with Eureka : ms로 개발되어 등록된 application 인스턴스 목록
+
+#### Eureka Service Discovery 프로젝트 생성
+* 프로젝트 생성
+  + group: com.example
+  + artifact : discoveryservice
+  + maven, java, jar, java11,
+  + version, name, desctription, package는 바꾸지 않고 진행
+  + dependency에 Eureka Server추가 후 생성 진행
+  + application.properties를 yml파일로 변경
+  ```yml
+  server:
+    port: 8761
+
+  spring:
+    application:
+      name: discoveryservice
+
+  eureka:
+    client:
+      register-with-eureka: false
+      fetch-registry: false
+  ```
+
+#### User Service 프로젝트 생성
+* 프로젝트 생성
+  + artifact : user-service
+  + type : maven, language : java, packaging : jar ,version: java 11, name : user-service
+  + dependency
+    - spring cloud discovery : eureka discovery client
+    - spring boot devtools
+    - lombok
+    - spring web
+  + 프로젝트 생성 후 MAINAPP에 @EnableDiscoveryClient추가
+  + application.yml 생성
+    ```yml
+    server:
+      port: 9001
+
+    spring:
+      application:
+        name: user-service
+
+    eureka:
+      client:
+        register-with-eureka: true
+        fetch-registry: true
+        service-url:
+          defaultZone: http://127.0.0.1:8761/eureka
+    ```
+  + 이후 프로젝트 실행하여 테스트
+
+* 같은 프로젝트 복사하여 두개 이상의 service 실행하기
+  + 우측 상단의 클래스 실행 버튼 드롭다운 클릭(Edit Configurations 클릭)
+  + 왼쪽 UserServiceAPplication을 선택한 후 위의 세번째 버튼(copy)클릭, -2을 붙여 편집
+  + 기존 1번을 먼저 실행 (2번은 포트 중복으로 사용 불가)
+  + Edit Configurations클릭 후 Environment 클릭(VM options: -Dserver.port=9002)
+  + 이후 두 클래스파일 모두 실행
+
+* user-service 프로젝트에서 터미널 열기
+  + 프로젝트 src폴더 내부로 이동 user-service/src에서 작업(pom.xml 과 같은 선상)
+  + mvn --version, java, javac 설치 확인
+  + mvn spring-boot:run -Dspring-boot-run.jvmArguments='-Dserver.port=9003'
