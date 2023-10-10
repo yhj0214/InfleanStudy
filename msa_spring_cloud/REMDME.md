@@ -205,3 +205,75 @@ restful한 api로 서로의 서비스에 접근하여 이용
   +   instance-id: ${spring.cloud.client.hostname}:${spring.application.instance_id:${random.value}}
 
 
+### Section2. API Gateway Service ==============================
+* 효과
+  + 인증 및 권한 부여
+  + 서비스 검색 통합
+  + 응답 캐싱
+  + 정책, 회로차단기 및 QoS 다시 시도
+  + 속도제한, 부하분산
+  + 로깅, 추적, 상관관계
+  + 헤더, 쿼리 문자열 및 청구 변환
+  + IP 허용 목록에 추가
+
+#### Netflix Ribbon
+* Spring Cloud에서의 MSA간 통신
+  + RestTemplate
+  + Feign Client
+ 
+* Ribbon: Client side Load Balancer
+  + 서비스 이름으로 호출
+  + Health Check
+    - 클라이언트 내부에 구축하여 사용(api gateway를 client내부에 구현)
+
+* Netflix Zuul
+  + spring boot 2.4이상부터 지원하지 않음
+  + spring cloud gateway를 사용할 것
+
+#### Spring Cloud Gateway - 기본
+* 테스트 프로젝트 생성
+  + 프로젝트명 : first-service, second-service
+  + dependency : lombok, spring web, eureka discovery client 종속성 추가
+  + controller 생성 : FistService Contoller
+    - @RestContoller, @RequestMapping("/")
+    - @GetMapping("/welcome") public String welcome(){return ""}
+  + yml 파일 생성
+    ``` application.yml
+    server:
+      port: 8081
+    spring:
+      application:
+        name: my-first-service
+    eureka:
+      client:
+        fetch-registry: false
+        register-with-eureka: false
+
+* gateway 프로젝트 생성
+  + dependencies : devTools, Eureka Discovery Client, Gateway
+  + application.yml 생성
+  ``` application.yml
+   server:
+     port: 8000
+   eureka:
+     client:
+       register-with-eureka: false
+       fetch-registry: false
+       service-url:
+         defaultZone: http://localhost: 8761/eureka
+   spring:
+     application:
+       name: gateway-service
+     cloud:
+       gateway:
+         routes:
+           - id: first-service
+             uri: http://localhost:8081/
+             predicates:
+               - Path=/first-service/**
+           - id: second-service
+             uri: http://localhost:8082/
+             predicates:
+               - Path=/second-service/**
+   ```
+   
