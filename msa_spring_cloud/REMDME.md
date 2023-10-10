@@ -277,3 +277,40 @@ restful한 api로 서로의 서비스에 접근하여 이용
                - Path=/second-service/**
    ```
    
+* spring cloud gateway - filter 적용
+  + ![image](https://github.com/yhj0214/InfleanStudy/assets/87259492/d704413d-8882-4ca4-9ae0-f703206f9661)
+  + FilterConfig.java클래스 생성(Application과같은 선상에 config파일 생성, 그 안에 생성)
+    - @Configuration 어노테이션 추가 -> 스프링부트 실행 시 해당 어노테이션이 있는 것들을 모아 메모리에 등록
+    - 해당 클래스에 RouteLocator 빈을 등록할 것이고, yml에서 지정해준 경로를 해당 파일에서 지정해줌
+    - 빈 등록 메서드 등 내용 구현
+      ``` java
+      @Configuration
+      public class FilterConfig{
+        @Bean
+        public RouteLocator gatewayRoutes(RouteLocatorBuilder builder) {
+          return builder.routes()
+                  .route(r -> r.path("/first-service/**")
+                              .filter(f -> f.addRequestHeader("first-request", "first-request-header")
+                                            .addResponseHeader("first-response", "first-response-header"))
+                              .uri("http://localhost:8081"))
+                  .route(r -> r.path("/second-service/**")
+                              .filter(f -> f.addRequestHeader("second-request", "second-request-header")
+                                            .addResponseHeader("second-response", "second-response-header"))
+                              .uri("http://localhost:8082"))
+                  .build();
+        }
+      }
+      // 해당 코드에서 작성한 request는 spring의 로그를 찍어 확인할 수 있고
+      // response는 개발자도구 network의 header를 통해 확인할 수 있음
+      ```
+      
+    - yml의 필터부분 주석처리
+  + First-service, Second-service api추가,
+    ``` java
+    @GetMapping("/message")
+    public String message(@RequestHeader("first-request") String header) {
+      log.info(header);
+      return "Hello World in First Service.";
+    }
+    ```
+    
