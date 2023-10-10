@@ -313,4 +313,18 @@ restful한 api로 서로의 서비스에 접근하여 이용
       return "Hello World in First Service.";
     }
     ```
-    
+  + 필터 추가하기(apigatway프로젝트의 applicatiom.yml, 해당 코드 추가)
+    - apigateway의 filterConfig의 @Configuation, @Bean 주석처리후 진행
+    ``` yml
+    cloud.gateway.routes.(id).filters:
+      - AddRequestHeader=first-request, first-request-header2
+      - AddResponseHeader=first-response, first-response-header2
+    ```
+
+* Spring Cloud Gateway - Custom Filter적용하기
+  + apigateway-service프로젝트에 (application과 동인선상에)filter폴더 추가, filter폴더에 CustomFilter.java 생성, 내부에 public static class Config 선언
+    > ![image](https://github.com/yhj0214/InfleanStudy/assets/87259492/556677ab-c74c-4978-88f0-80e58bfb97d3)
+  + application.yml 파일 수정
+    > ![image](https://github.com/yhj0214/InfleanStudy/assets/87259492/e541aab8-be69-4b7b-b7e2-5f4ab4ee8f23)
+  + 메서드 추가
+    > ![image](https://github.com/yhj0214/InfleanStudy/assets/87259492/a45da902-5029-41e3-8236-b4aedcb50a73)
