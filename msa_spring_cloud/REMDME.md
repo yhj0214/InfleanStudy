@@ -322,7 +322,7 @@ restful한 api로 서로의 서비스에 접근하여 이용
     ```
 
 * Spring Cloud Gateway - Custom Filter적용하기
-  + CustomFilter.java 생성
+  + apigateway-service프로젝트에 (application과 동인선상에)filter폴더 추가, filter폴더에 CustomFilter.java 생성
     > ![image](https://github.com/yhj0214/InfleanStudy/assets/87259492/556677ab-c74c-4978-88f0-80e58bfb97d3)
   + application.yml 파일 수정
     > ![image](https://github.com/yhj0214/InfleanStudy/assets/87259492/e541aab8-be69-4b7b-b7e2-5f4ab4ee8f23)
