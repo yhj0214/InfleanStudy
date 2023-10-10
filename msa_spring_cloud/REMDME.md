@@ -195,3 +195,13 @@ restful한 api로 서로의 서비스에 접근하여 이용
   + 프로젝트 src폴더 내부로 이동 user-service/src에서 작업(pom.xml 과 같은 선상)
   + mvn --version, java, javac 설치 확인
   + mvn spring-boot:run -Dspring-boot-run.jvmArguments='-Dserver.port=9003'
+ 
+* random포트번호를 사용하여 instance생성하기
+  + 기존에 사용하던 instance를 모두 삭제
+  + yml의 포트번호를 0으로 등록 후 실행
+  + 이후 추가하여 실행하여도 실행 가능, (eureka url로 접속하여 확인하면 설정한 포트번호 0번만 보여짐)
+  + 여러개를 실행하여도 하나로만 보이기 때문에 id를 지정해 줄것
+  + eureka.instance:
+  +   instance-id: ${spring.cloud.client.hostname}:${spring.application.instance_id:${random.value}}
+
+
