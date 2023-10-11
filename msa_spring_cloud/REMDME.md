@@ -336,3 +336,13 @@ restful한 api로 서로의 서비스에 접근하여 이용
     ![image](https://github.com/yhj0214/InfleanStudy/assets/87259492/d4ff1490-4c6e-46c2-9891-7992b7b84bb2)
   + CustomFilter와 같은 폴더 내에 GlobalFilter.java 생성 및 내용 구현(Config Class 내용을 구현한 후 @Data어노테이션 붙이기)
 
+* Spring Cloud Gateway - Custom Filter(Logging)
+  + 글로벌 필터를 응용하여 로그인 출력하기,
+    ![image](https://github.com/yhj0214/InfleanStudy/assets/87259492/7829534f-e7e1-4b39-9f9b-b510097b85fb)
+  + yml 파일 수정하기
+    ![image](https://github.com/yhj0214/InfleanStudy/assets/87259492/3a6e347a-ff70-4888-8e23-8dd88cb76584)
+  + 필터 적용 순서 글로벌 -> 커스텀 -> 로깅 -> 커스텀 -> 글로벌
+    ![image](https://github.com/yhj0214/InfleanStudy/assets/87259492/45cae1a4-7778-4052-b77f-f5336622571b)
+  + filter폴더에 LoggingFilter.java생성(Global Filter복사하여 사용)
+  + 
+
