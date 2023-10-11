@@ -328,3 +328,11 @@ restful한 api로 서로의 서비스에 접근하여 이용
     > ![image](https://github.com/yhj0214/InfleanStudy/assets/87259492/e541aab8-be69-4b7b-b7e2-5f4ab4ee8f23)
   + 메서드 추가
     > ![image](https://github.com/yhj0214/InfleanStudy/assets/87259492/a45da902-5029-41e3-8236-b4aedcb50a73)
+
+* Spring Cloud Gateway - Global Filter 적용
+  + 라우팅 정보가 있을때 필요한 필터가 있을때마다 각기 적용해야함 -> 한번에 모든 곳에 글로벌 필터 적용 가능
+    ![image](https://github.com/yhj0214/InfleanStudy/assets/87259492/80144b24-04b9-4bdf-a8f8-0db178aa0e15)
+  + global-filter 적용방법(yml)
+    ![image](https://github.com/yhj0214/InfleanStudy/assets/87259492/d4ff1490-4c6e-46c2-9891-7992b7b84bb2)
+  + CustomFilter와 같은 폴더 내에 GlobalFilter.java 생성 및 내용 구현(Config Class 내용을 구현한 후 @Data어노테이션 붙이기)
+
