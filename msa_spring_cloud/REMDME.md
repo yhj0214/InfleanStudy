@@ -338,7 +338,8 @@ restful한 api로 서로의 서비스에 접근하여 이용
 
 * Spring Cloud Gateway - Custom Filter(Logging)
   + 글로벌 필터를 응용하여 로그인 출력하기,
-    ![image](https://github.com/yhj0214/InfleanStudy/assets/87259492/7829534f-e7e1-4b39-9f9b-b510097b85fb)
+    ![image](https://github.com/yhj0214/InfleanStudy/assets/87259492/e53cd8fb-0ca0-46ec-bf0e-2f9d1ef14861)
+
   + yml 파일 수정하기
     ![image](https://github.com/yhj0214/InfleanStudy/assets/87259492/3a6e347a-ff70-4888-8e23-8dd88cb76584)
   + 필터 적용 순서 글로벌 -> 커스텀 -> 로깅 -> 커스텀 -> 글로벌
