@@ -344,5 +344,6 @@ restful한 api로 서로의 서비스에 접근하여 이용
   + 필터 적용 순서 글로벌 -> 커스텀 -> 로깅 -> 커스텀 -> 글로벌
     ![image](https://github.com/yhj0214/InfleanStudy/assets/87259492/45cae1a4-7778-4052-b77f-f5336622571b)
   + filter폴더에 LoggingFilter.java생성(Global Filter복사하여 사용)
-  + 
-
+  + apply메서드만 위와같이 변경
+  + yml파일에 name속성을 이용하여 추가할 속성을 지정하여 추가(파라미터도 같이 전달)
+  + Ordered.HIGHST_PRECEDENCE, LOWEST_PRECEDENCE로 우선순위 지정 가능 HIGH일경우 가장 먼저 들어가고 가장 나중에 종료
