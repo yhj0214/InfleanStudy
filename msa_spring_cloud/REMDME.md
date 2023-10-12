@@ -339,7 +339,6 @@ restful한 api로 서로의 서비스에 접근하여 이용
 * Spring Cloud Gateway - Custom Filter(Logging)
   + 글로벌 필터를 응용하여 로그인 출력하기,
     ![image](https://github.com/yhj0214/InfleanStudy/assets/87259492/e53cd8fb-0ca0-46ec-bf0e-2f9d1ef14861)
-
   + yml 파일 수정하기
     ![image](https://github.com/yhj0214/InfleanStudy/assets/87259492/3a6e347a-ff70-4888-8e23-8dd88cb76584)
   + 필터 적용 순서 글로벌 -> 커스텀 -> 로깅 -> 커스텀 -> 글로벌
@@ -348,3 +347,17 @@ restful한 api로 서로의 서비스에 접근하여 이용
   + apply메서드만 위와같이 변경
   + yml파일에 name속성을 이용하여 추가할 속성을 지정하여 추가(파라미터도 같이 전달)
   + Ordered.HIGHST_PRECEDENCE, LOWEST_PRECEDENCE로 우선순위 지정 가능 HIGH일경우 가장 먼저 들어가고 가장 나중에 종료
+
+
+* Spring Cloud Gateway-Eureka 연동
+  + netflix-eureka-client dependency추가(cloudgateway, first, secondservice), yml파일 eureka 추가
+    ![image](https://github.com/yhj0214/InfleanStudy/assets/87259492/61050828-bd49-4ebb-850a-2bc361dee213)
+  + 등록된 서비스에 맞추어 uri설정해주기(yml파일)
+    ![image](https://github.com/yhj0214/InfleanStudy/assets/87259492/650382c5-d453-4adb-9675-5fe9a0ec0aa3)
+  + eureka서버 실행 후 올라간 프로젝트 확인하기
+    ![image](https://github.com/yhj0214/InfleanStudy/assets/87259492/a78ce76e-b3ce-441c-86c5-cacf74a0a1a7)
+  + apigateway, firstservice, secondservice
+    ![image](https://github.com/yhj0214/InfleanStudy/assets/87259492/dfdd198e-070b-4a33-9f2b-1a055826f790)
+    ![image](https://github.com/yhj0214/InfleanStudy/assets/87259492/6816dcf5-d487-4f58-98b0-0ba3c694aaeb)
+  + discoveryservice실행 이후 apigateway, 각 service프로젝트 실행
+    
