@@ -361,3 +361,13 @@ restful한 api로 서로의 서비스에 접근하여 이용
     ![image](https://github.com/yhj0214/InfleanStudy/assets/87259492/6816dcf5-d487-4f58-98b0-0ba3c694aaeb)
   + discoveryservice실행 이후 apigateway, 각 service프로젝트 실행
     
+* Spring Cloud Gateway- Load Balancer
+  + fisrt, second service 각각 2개씩 기동, 포트번호를 변경하여 기동(8081, 8082, 9091, 9092 로 실행)
+    ![image](https://github.com/yhj0214/InfleanStudy/assets/87259492/503e64ee-1c51-48e1-bd0a-27b4c8f8fa39)
+  + 같은 애플리케이션 실행 시 gateway에서는 포트번호만 다른 같은 이름의 프로젝트중 가야할 곳을 설정해주어야 함 -> 랜덤포트 사용, port : 0
+  + 각 서비스의 yml을 아래와 같이 설정해주어야 함.
+    ![image](https://github.com/yhj0214/InfleanStudy/assets/87259492/9d4d13f8-7509-4d14-9c3b-2f2ff4c8e997)
+  + 랜덤포트 설정 후 같은 서비스를 다시 두개 실행, 포트번호 확인을 위해 아래와 같이 코드 수정
+    ![image](https://github.com/yhj0214/InfleanStudy/assets/87259492/65340b72-2b59-40af-ae18-1088597fb333)
+  + 랜덤포트를 설정하여 같은 애플리케이션 여러개 설정시 라운드 로빈 방식으로 번갈아가면서 호출하게 된다.
+    
