@@ -371,4 +371,92 @@ restful한 api로 서로의 서비스에 접근하여 이용
     ![image](https://github.com/yhj0214/InfleanStudy/assets/87259492/65340b72-2b59-40af-ae18-1088597fb333)
   + 랜덤포트를 설정하여 같은 애플리케이션 여러개 설정시 라운드 로빈 방식으로 번갈아가면서 호출하게 된다.
   + 랜덤포트를 사용하지 않더라도 같은 이름의 애플리케이션 여러개 실행 시 rr방식으로 번갈아가면서 호출함
-    
+
+
+### Section3. E-commerce 애플리케이션
+* 개요
+  ![image](https://github.com/yhj0214/InfleanStudy/assets/87259492/fe5f3efc-d39b-4296-b5ca-87d4493d7e08)
+* 구성
+  ![image](https://github.com/yhj0214/InfleanStudy/assets/87259492/0e0d6455-0c66-453f-9e85-1fd464baddd7)
+  ![image](https://github.com/yhj0214/InfleanStudy/assets/87259492/9f9531b8-5606-48dd-9d52-a0e80bf8e6c5)
+* 사용 기술
+  ![image](https://github.com/yhj0214/InfleanStudy/assets/87259492/8aa521d9-a970-4f74-8f3b-570be660c555)
+* api 명세
+  ![image](https://github.com/yhj0214/InfleanStudy/assets/87259492/82b69903-dca4-49ab-bd30-fecc5b075e46)
+
+
+
+### Section4. User-microService(가입, 유저조회 부분)
+- 개요
+- 프로젝트 생성
+- DB
+- 회원가입
+- Security
+
+* 시스템 구조
+  ![image](https://github.com/yhj0214/InfleanStudy/assets/87259492/67bd5569-9f86-4ee1-abe2-1ab079da28e9)
+* 기능
+  ![image](https://github.com/yhj0214/InfleanStudy/assets/87259492/60f24cc5-f88e-4bbe-8f5e-0eb8dae4b3a2)
+
+* 프로젝트 생성 목차(UserMicroService)
+  + dependency
+    ![image](https://github.com/yhj0214/InfleanStudy/assets/87259492/c6c830d9-559e-47f6-a83d-6edf83b53d8e)
+  + application에 @EnableDiscoveryClient 어노테이션 추가
+  + yml파일 수정
+    ![image](https://github.com/yhj0214/InfleanStudy/assets/87259492/9ccaaeb8-7760-4c98-ac08-c97fc37b6b2b)
+  + 컨트롤러 생성
+    ![image](https://github.com/yhj0214/InfleanStudy/assets/87259492/5be585cc-fcd8-4702-a32c-87c590e27c5c)
+  + yml 파일 추가 및 연결여부 확인
+    ![image](https://github.com/yhj0214/InfleanStudy/assets/87259492/8bfe0b67-8bd0-437d-9d90-08b733393211)
+  + (연결 여부 확인하는 방법2- 컴포넌트 등록하기)
+    ![image](https://github.com/yhj0214/InfleanStudy/assets/87259492/320283b7-121d-4a72-8eb2-6e21e47d86a1)
+  + H2DB사용을 위한 dependency 추가, yml파일에 h2 DB와 맞는 환경 추가
+    ![image](https://github.com/yhj0214/InfleanStudy/assets/87259492/5f943773-3add-435e-b9d7-92bf910b5cb5)
+  + h2 1.4.198은 보안 문제로 자동으로 db를 설정해주지 않음, 편의성을 위하여 버전을 낮추어서 진행
+
+* 프로젝트 생성(UserMicroService)
+  + artifact: user-service, gradle
+  + dependency: spring boot devtools, lombok, spring web, eureka discovery client
+  + @EnableDiscoveryClient(application클래스에 어노테이션 붙이기)
+  + yml파일 수정
+    ![image](https://github.com/yhj0214/InfleanStudy/assets/87259492/b47e8c17-ca64-4d44-a462-9dfde205b5fd)
+  + controller폴더 생성 후 UserController.java클래스 생성(@RestContoller, RequestMapping("/"))
+    ![image](https://github.com/yhj0214/InfleanStudy/assets/87259492/b024adc5-e06e-4205-bbba-3a8f6d5fbfb1)
+  + eureka서비스 실행, userservice 실행(구현한 메서드를 기반으로 구동 상황 체크)
+  + yml 파일에 해당 코드 추가
+    ![image](https://github.com/yhj0214/InfleanStudy/assets/87259492/dfc26141-f850-4000-852c-1fded94ba716)
+  + Environment를 이용한 값 불러오기
+    ![image](https://github.com/yhj0214/InfleanStudy/assets/87259492/222d5eb7-1271-4699-88ba-4ecf72472d99)
+    ![image](https://github.com/yhj0214/InfleanStudy/assets/87259492/8dfc7a2f-91ae-4146-bb41-87badc2eba8d)
+  + value annotation을 이용한 값 불러오기
+    - vo 폴더 생성
+    - Greeting.java 클래스 생성annotation(Component, Data), yml의 사용할 변수 선언
+      ![image](https://github.com/yhj0214/InfleanStudy/assets/87259492/4f73d63e-19f2-4c78-8e94-e399fcb49338)
+    - Controller에서 사용
+      ![image](https://github.com/yhj0214/InfleanStudy/assets/87259492/70056b45-46c9-4d33-be51-c77d18cd0d33)
+      ![image](https://github.com/yhj0214/InfleanStudy/assets/87259492/036802eb-e93e-47b9-8784-674c962bfd66)
+
+* H2 DB 연동
+  + h2 dependency 추가, yml파일에 h2 DB를 사용하기 위한 설정 코드 구현(1.3.176버전 사용 시 자동생성)
+    ![image](https://github.com/yhj0214/InfleanStudy/assets/87259492/770d10ab-2966-461d-ac3b-1cd97c469b3b)
+
+* User-MicroService 회원가입
+  + Contoller, User클래스 구현
+    ![image](https://github.com/yhj0214/InfleanStudy/assets/87259492/8ae01564-3f29-4e8b-a86f-9b9816edb623)
+  + Validation check
+    ![image](https://github.com/yhj0214/InfleanStudy/assets/87259492/f8319ea8-7dba-40c5-855a-f349fd09fa4f)
+  + 아래와 같은 구조로 데이터가 이동할 예정
+    ![image](https://github.com/yhj0214/InfleanStudy/assets/87259492/d33f0ba4-7bd1-4e75-a21b-3d73e6475054)
+  + 각 클래스파일 내용
+    ![image](https://github.com/yhj0214/InfleanStudy/assets/87259492/f21db200-5968-430e-ad8f-62ea309b5aed)
+  + jpa dependency추가
+  + UserEntity클래스 생성(데이터베이스와 연동되는 객체)
+    ![image](https://github.com/yhj0214/InfleanStudy/assets/87259492/d10ebaab-898e-4d9f-af36-5cfe808a06d7)
+  + service 회원가입 메서드 구현
+    ![image](https://github.com/yhj0214/InfleanStudy/assets/87259492/54494279-9aa2-4813-acbf-c509a4b83883)
+  + controller 회원가입 메서드 구현
+    ![image](https://github.com/yhj0214/InfleanStudy/assets/87259492/9ebaf7f9-ea20-41b4-bbf4-c83a58f925f1)
+  + 회원가입 요청
+    ![image](https://github.com/yhj0214/InfleanStudy/assets/87259492/918f06ff-8d39-40a9-9ab4-c876948e8240)
+  + 
+      
