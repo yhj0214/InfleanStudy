@@ -458,5 +458,31 @@ restful한 api로 서로의 서비스에 접근하여 이용
     ![image](https://github.com/yhj0214/InfleanStudy/assets/87259492/9ebaf7f9-ea20-41b4-bbf4-c83a58f925f1)
   + 회원가입 요청
     ![image](https://github.com/yhj0214/InfleanStudy/assets/87259492/918f06ff-8d39-40a9-9ab4-c876948e8240)
-  + 
+
+* User-Microservice-JPA
+  + 회원가입 테스트 진행
+    ![image](https://github.com/yhj0214/InfleanStudy/assets/87259492/563b7498-a748-40ae-a6df-41b557d767d6)
+  + 데이터베이스 연결 항목 추가, 이후 테스트 진행
+    ![image](https://github.com/yhj0214/InfleanStudy/assets/87259492/17aa6b7d-53e5-4fd6-b86b-7765b1f8db2c)
+  + 반환타입은 responseEntity로 사용
+    ![image](https://github.com/yhj0214/InfleanStudy/assets/87259492/c0ea82e4-8324-48fd-804c-f722659c7a45)
+  + vo패키지에 ResponseUser.java클래스 생성
+    ![image](https://github.com/yhj0214/InfleanStudy/assets/87259492/102a1e63-a6d5-413e-af4a-26264501bbad)
+  + 반환값도 지정하기
+    ![image](https://github.com/yhj0214/InfleanStudy/assets/87259492/418203c9-6aeb-4674-afc0-0bffb5ec92c2)
+  + userServiceImpl의 createUser에서 반환할 객체 다시 지정하주기
       
+* User Microservice -Security
+  ![image](https://github.com/yhj0214/InfleanStudy/assets/87259492/308c9350-51a9-427b-a677-9938d3be0a12)
+  + spring-boot-starter-security dependency추가
+  + security패키지 생성 후 WebSecurity.java클래스 생성, extends WebSecurityConfigurerAdapter 확장,
+  + 어노테이션(@Configuration, @EnableWebSecurity사용
+  + override메서드 정의(configure메서드 사용)
+    ![image](https://github.com/yhj0214/InfleanStudy/assets/87259492/a7ad313a-5c43-44d3-ab18-ed53af3e3f4a)
+  + UserService의 createUser에 암오화 코드 추가
+    ![image](https://github.com/yhj0214/InfleanStudy/assets/87259492/3eb2550e-b170-451c-a33a-d5665a889349)
+  + userRepository생성이 UserService생성자와 연결
+    ![image](https://github.com/yhj0214/InfleanStudy/assets/87259492/ee19b91d-42b7-4505-9f6e-2da98775a146)
+  + passwordEncoder Bean등록해두기
+    ![image](https://github.com/yhj0214/InfleanStudy/assets/87259492/b78d97b9-a8a5-400d-882b-3f7fce14fed6)
+  + 
