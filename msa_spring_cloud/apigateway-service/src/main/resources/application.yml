@@ -16,10 +16,22 @@ spring:
       default-filters:
         - name: GlobalFilter
           args:
-            baseMessage: Spring Cloud Gateway GlobalFilter
+            baseMessage: Spring Cloud Gateway Global Filter
             preLogger: true
             postLogger: true
       routes:
+        - id: user-service
+          uri: lb://USER-SERVICE # eureka에서 확인할 수 있는 서비스명 Application name
+          predicates:
+            - Path=/user-service/** # user-service로 들어오는 모든 요청을 USER-service로 보내줄 것이다.
+        - id: catalog-service
+          uri: lb://CATALOG-SERVICE
+          predicates:
+            - Path=/catalog-service/**
+        - id: order-service
+          uri: lb://ORDER-SERVICE
+          predicates:
+            - Path=/order-service/**
         - id: first-service
           uri: lb://MY-FIRST-SERVICE
           predicates:
@@ -28,16 +40,19 @@ spring:
 #            - AddRequestHeader=first-request, first-request-header2
 #            - AddResponseHeader=first-response, first-response-header2
             - CustomFilter
-        - id: second-service
-          uri: lb://MY-SECOND-SERVICE
-          predicates:
-            - Path=/second-service/**
-          filters:
-#            - AddRequestHeader=second-request, second-request-header2
-#            - AddResponseHeader=second-response, second-response-header2
-            - name: CustomFilter
-            - name: LoggingFilter
-              args:
-                baseMessage: Hi, there
-                preLogger: true
-                postLogger: true
+
+
+
+#        - id: second-service
+#          uri: lb://MY-SECOND-SERVICE
+#          predicates:
+#            - Path=/second-service/**
+#          filters:
+##            - AddRequestHeader=second-request, second-request-header2
+##            - AddResponseHeader=second-response, second-response-header2
+#            - name: CustomFilter
+#            - name: LoggingFilter
+#              args:
+#                baseMessage: Hi, there
+#                preLogger: true
+#                postLogger: true
